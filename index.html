@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div id="app" class="box left-stru">
+            <div class="box">
+                <welcome></welcome>
+            </div>
+            <div class="box menu d-grid">
+                <button class="btn btn-primary" type="button">CREATE</button>
+                <button class="btn btn-primary" type="button">UPDATE</button>
+                <button class="btn btn-primary" type="button">DELETE</button>
+                <button class="btn btn-primary" type="button">RESOLVE</button>
+            </div>
+
+        </div>
+        <div class="box table">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                title: '選擇你的身分',
+
+            },
+            methods: {
+                chooseIdentity(identity) {
+                    alert(identity + 'hello');
+                }
+            },
+            components: {
+                'welcome': {
+                    template: `<div>{{title}}                        
+                                  <input type="button" class="btn btn-primary btn-sm" :value="item" @click="chooseIdentity(item, $event)" v-for="(item, index) in identity"/>
+                              </div> `,
+                    data() {
+                        return {
+                            title: '選擇你的身分',
+                            identity: ['QA', 'RD', 'PM', 'Admin']
+                        }
+                    },
+                    methods: {
+                        chooseIdentity(identity, e) {                            
+                            $(this.$el).children('input:disabled').prop('disabled', false)
+                            e.target.disabled = true;
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
